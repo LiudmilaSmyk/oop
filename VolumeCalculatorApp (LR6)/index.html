@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volume Calculator</title>
+</head>
+<body>
+    <h1>Volume Calculator</h1>
+    <form action="VolumeCalculatorServlet" method="get">
+        <label for="shape">Shape:</label>
+        <select name="shape" id="shape">
+            <option value="cube">Cube</option>
+            <option value="sphere">Sphere</option>
+            <!-- Добавьте другие формы по аналогии -->
+        </select><br><br>
+
+        <label for="side">Side Length:</label>
+        <input type="text" id="side" name="side"><br><br>
+
+        <label for="radius">Radius:</label>
+        <input type="text" id="radius" name="radius"><br><br>
+
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
