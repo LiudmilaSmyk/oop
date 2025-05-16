@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Laptop</title>
+</head>
+<body>
+<h1>Edit Laptop</h1>
+<form th:action="@{/update/{id}(id=${laptop.id})}" th:object="${laptop}" method="post">
+    <input type="text" th:field="*{brand}" placeholder="Brand" required>
+    <input type="text" th:field="*{model}" placeholder="Model" required>
+    <input type="number" th:field="*{year}" placeholder="Year" required>
+    <input type="number" th:field="*{price}" placeholder="Price" required>
+    <input type="text" th:field="*{processor}" placeholder="Processor" required>
+    <button type="submit">Update Laptop</button>
+</form>
+</body>
+</html>

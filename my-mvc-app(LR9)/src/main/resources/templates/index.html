@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop List</title>
+</head>
+<body>
+<h1>Add Laptop</h1>
+<form th:action="@{/addLaptop}" th:object="${newLaptop}" method="post">
+    <input type="text" th:field="*{brand}" placeholder="Brand" required>
+    <input type="text" th:field="*{model}" placeholder="Model" required>
+    <input type="number" th:field="*{year}" placeholder="Year" required>
+    <input type="number" th:field="*{price}" placeholder="Price" required>
+    <input type="text" th:field="*{processor}" placeholder="Processor" required>
+    <button type="submit">Add Laptop</button>
+</form>
+
+<h1>Laptop List</h1>
+<div th:each="laptop : ${laptops}">
+    <h3 th:text="${laptop.brand} + ' ' + ${laptop.model}"></h3>
+    <p th:text="'Year: ' + ${laptop.year}"></p>
+    <p th:text="'Price: $' + ${laptop.price}"></p>
+    <p th:text="'Processor: ' + ${laptop.processor}"></p>
+</div>
+</body>
+</html>

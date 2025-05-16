@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop List</title>
+</head>
+<body>
+    <h1>Add Laptop</h1>
+    <form id="laptopForm">
+        <input type="text" id="brand" placeholder="Brand" required>
+        <input type="text" id="model" placeholder="Model" required>
+        <input type="number" id="year" placeholder="Year" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <input type="text" id="processor" placeholder="Processor" required>
+        <button type="submit">Add Laptop</button>
+    </form>
+
+    <h1>Laptop List</h1>
+    <div id="laptopList"></div>
+
+    <script>
+        document.getElementById('laptopForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const laptop = {
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                year: document.getElementById('year').value,
+                price: document.getElementById('price').value,
+                processor: document.getElementById('processor').value
+            };
+
+            fetch('/api/laptops', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(laptop)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                loadLaptops();
+            });
+        });
+
+        function loadLaptops() {
+            fetch('/api/laptops')
+            .then(response => response.json())
+            .then(data => {
+                const laptopList = document.getElementById('laptopList');
+                laptopList.innerHTML = '';
+                data.forEach(laptop => {
+                    const laptopDiv = document.createElement('div');
+                    laptopDiv.innerHTML = `
+                        <h3>${laptop.brand} ${laptop.model}</h3>
+                        <p>Year: ${laptop.year}</p>
+                        <p>Price: $${laptop.price}</p>
+                        <p>Processor: ${laptop.processor}</p>
+                    `;
+                    laptopList.appendChild(laptopDiv);
+                });
+            });
+        }
+
+        loadLaptops();
+    </script>
+</body>
+</html>
